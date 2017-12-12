@@ -1,0 +1,14 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="videoGame">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:byte" name="id"/>
+                <xs:element type="xs:string" name="name"/>
+                <xs:element type="xs:dateTime" name="releaseDate"/>
+                <xs:element type="xs:byte" name="reviewScore"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="category"/>
+            <xs:attribute type="xs:string" name="rating"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
