@@ -13,22 +13,22 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class FootballTests extends TestConfig {
 
     @Test
-    public void getAllCompetitionsOneSeason() {
+    public void getDetailsOfOneArea() {
         given().
                 spec(football_requestSpec).
-                queryParam("season", 2016).
+                queryParam("areas", 2072).
         when().
-                get("competitions/");
+                get("areas/");
     }
 
     @Test
-    public void getTeamCount_OneComp() {
+    public void getDateFounded() {
         given().
                 spec(football_requestSpec).
         when().
-                get("competitions/426/teams").
+                get("teams/57").
         then().
-                body("count", equalTo(20));
+                body("founded", equalTo(1886));
     }
 
     @Test
@@ -36,14 +36,14 @@ public class FootballTests extends TestConfig {
         given().
                 spec(football_requestSpec).
         when().
-                get("competitions/426/teams").
+                get("competitions/2021/teams").
         then().
-                body("teams.name[0]", equalTo("Hull City FC"));
+                body("teams.name[0]", equalTo("Arsenal FC"));
     }
 
     @Test
     public void getAllTeamData() {
-        String responseBody = given().spec(football_requestSpec).when().get("competitions/426/teams").asString();
+        String responseBody = given().spec(football_requestSpec).when().get("teams/57").asString();
         System.out.println(responseBody);
     }
 
@@ -53,7 +53,7 @@ public class FootballTests extends TestConfig {
                 given().
                         spec(football_requestSpec).
                 when().
-                        get("competitions/426/teams").
+                        get("teams/57").
                 then().
                         contentType(ContentType.JSON).
                         extract().response();
@@ -69,7 +69,7 @@ public class FootballTests extends TestConfig {
                 given().
                         spec(football_requestSpec).
                         when().
-                        get("competitions/426/teams").
+                        get("teams/57").
                         then().
                         contentType(ContentType.JSON).
                         extract().response();
@@ -86,7 +86,7 @@ public class FootballTests extends TestConfig {
     public void extractFirstTeamName() {
 
         String firstTeamName = given().spec(football_requestSpec).when().
-                get("competitions/426/teams").jsonPath().getString("teams.name[0]");
+                get("competitions/2021/teams").jsonPath().getString("teams.name[0]");
 
         System.out.println(firstTeamName);
     }
@@ -97,7 +97,7 @@ public class FootballTests extends TestConfig {
         Response response = given().
                 spec(football_requestSpec).
                 when().
-                get("competitions/426/teams").
+                get("competitions/2021/teams").
                 then().
                 contentType(ContentType.JSON).
                 extract().response();

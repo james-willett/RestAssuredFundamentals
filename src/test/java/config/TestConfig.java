@@ -18,7 +18,7 @@ public class TestConfig {
     @BeforeClass
     public static void setup() {
 
-        RestAssured.proxy("localhost", 8888); // comment this out if you aren't running REST Assured through a proxy
+   //     RestAssured.proxy("localhost", 8888); // comment this out if you aren't running REST Assured through a proxy
 
         /* Request Specifications */
         videoGame_requestSpec = new RequestSpecBuilder().
@@ -31,7 +31,7 @@ public class TestConfig {
 
         football_requestSpec = new RequestSpecBuilder().
                 setBaseUri("http://api.football-data.org").
-                setBasePath("/v1/").
+                setBasePath("/v2/").
                 addHeader("X-Auth-Token", "fae8b099875d41f395c58dbb7f35556b").
                 addHeader("X-Response-Control", "minified").
                 build();
