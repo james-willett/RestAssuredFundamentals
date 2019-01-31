@@ -1,5 +1,6 @@
 import config.EndPoint;
 import config.TestConfig;
+import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
@@ -125,6 +126,17 @@ public class VideoGameDBTests extends TestConfig {
                 get(EndPoint.SINGLE_VIDEOGAME).
         then().
                 body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
+    }
+
+    @Test
+    public void convertJSONToPojo() {
+        Response response =  given().pathParam("videoGameId", 5).
+                when().
+                get(EndPoint.SINGLE_VIDEOGAME);
+
+        VideoGame videoGame = response.getBody().as(VideoGame.class);
+
+        System.out.println(videoGame.toString());
     }
 
 
