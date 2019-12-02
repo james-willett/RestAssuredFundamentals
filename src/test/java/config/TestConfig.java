@@ -18,15 +18,15 @@ public class TestConfig {
     @BeforeClass
     public static void setup() {
 
-        RestAssured.proxy("localhost", 8888); // comment this out if you aren't running REST Assured through a proxy
+   //     RestAssured.proxy("localhost", 8888); // comment this out if you aren't running REST Assured through a proxy
 
         /* Request Specifications */
         videoGame_requestSpec = new RequestSpecBuilder().
-                setBaseUri("http://localhost").
-                setPort(8080).
+                setBaseUri("http://video-game-db.eu-west-2.elasticbeanstalk.com").
+          //      setPort(8080).
                 setBasePath("/app/").
-                addHeader("Content-Type", "application/xml"). // change between "application/xml" and "application/json" as required
-                addHeader("Accept", "application/xml"). // change between "application/xml" and "application/json" as required
+                addHeader("Content-Type", "application/json"). // change between "application/xml" and "application/json" as required
+                addHeader("Accept", "application/json"). // change between "application/xml" and "application/json" as required
                 build();
 
         football_requestSpec = new RequestSpecBuilder().
