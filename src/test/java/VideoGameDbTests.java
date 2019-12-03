@@ -49,4 +49,23 @@ public class VideoGameDbTests extends VideoGameConfig {
         then();
 
     }
+
+    @Test
+    public void updateGame() {
+
+        String gameBodyJson = "{\n" +
+                "  \"id\": 1,\n" +
+                "  \"name\": \"MyNewGame\",\n" +
+                "  \"releaseDate\": \"2019-12-03T10:02:58.768Z\",\n" +
+                "  \"reviewScore\": 77,\n" +
+                "  \"category\": \"Driving\",\n" +
+                "  \"rating\": \"Universal\"\n" +
+                "}";
+
+        given().
+                body(gameBodyJson).
+        when().
+                put("videogames/1").
+        then();
+    }
 }
