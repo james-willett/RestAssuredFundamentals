@@ -1,8 +1,9 @@
+import config.VideoGameConfig;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 
-public class MyFirstTest extends TestConfig {
+public class MyFirstTest extends VideoGameConfig {
 
     @Test
     public void myFirstTest() {
