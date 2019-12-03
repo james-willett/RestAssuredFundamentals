@@ -30,4 +30,23 @@ public class VideoGameDbTests extends VideoGameConfig {
                 .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
     }
+
+    @Test
+    public void createNewGameByXML() {
+        String gameBodyXml = "  <videoGame category=\"Shooter\" rating=\"Universal\">\n" +
+                "    <id>13</id>\n" +
+                "    <name>Resident Evil 8</name>\n" +
+                "    <releaseDate>2005-10-01T00:00:00+01:00</releaseDate>\n" +
+                "    <reviewScore>99</reviewScore>\n" +
+                "  </videoGame>";
+
+        given()
+               .body(gameBodyXml)
+               .header("Accept", "application/xml")
+               .header("Content-Type", "application/xml").
+        when()
+                .post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        then();
+
+    }
 }
