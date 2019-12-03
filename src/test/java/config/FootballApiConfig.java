@@ -19,8 +19,10 @@ public class FootballApiConfig {
         football_requestSpec = new RequestSpecBuilder()
                 .setBaseUri("http://api.football-data.org")
                 .setBasePath("/v2/")
-                .addHeader("X-Auth-Token", "ae8b099875d41f395c58dbb7f35556b")
+                .addHeader("X-Auth-Token", "fae8b099875d41f395c58dbb7f35556b")
                 .addHeader("X-Response-Control", "minified")
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
                 .build();
 
         responseSpecification = new ResponseSpecBuilder()
