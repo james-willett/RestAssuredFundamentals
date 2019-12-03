@@ -68,4 +68,14 @@ public class VideoGameDbTests extends VideoGameConfig {
                 put("videogames/1").
         then();
     }
+
+    @Test
+    public void deleteGame() {
+        given().
+        when()
+                .delete("videogames/1").
+        then();
+
+
+    }
 }
