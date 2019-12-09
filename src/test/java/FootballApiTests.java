@@ -38,5 +38,24 @@ public class FootballApiTests extends FootballApiConfig {
         then().
                 body("teams.name[0]", equalTo("Arsenal FC"));
     }
-    
+
+    @Test
+    public void getAllTeamData() {
+        String responseBody = get("teams/57").asString();
+        System.out.println(responseBody);
+    }
+
+    @Test
+    public void getAllTeamData_DoCheckFirst() {
+        Response response =
+                given().
+                        when()
+                        .get("teams/57").
+                        then()
+                        .contentType(ContentType.JSON)
+                        .extract().response();
+
+        String jsonResponseAsString = response.asString();
+    }
+
 }
