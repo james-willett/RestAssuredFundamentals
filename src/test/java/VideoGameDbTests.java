@@ -111,16 +111,5 @@ public class VideoGameDbTests extends VideoGameConfig {
         then().
                 body(matchesXsdInClasspath("VideoGameXSD.xsd"));
     }
-
-    @Test
-    public void testVideoGameSchemaJSON() {
-        given().
-                pathParam("videoGameId", 5).
-        when().
-                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
-        then().
-                body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
-    }
-
-
+    
 }
