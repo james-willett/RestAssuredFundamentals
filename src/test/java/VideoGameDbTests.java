@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 
+import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 public class VideoGameDbTests extends VideoGameConfig {
 
     @Test
@@ -96,4 +99,28 @@ public class VideoGameDbTests extends VideoGameConfig {
                post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
         then();
     }
+
+    @Test
+    public void testVideoGameSchemaXML() {
+        given().
+                pathParam("videoGameId", 5).
+                header("Content-Type", "application/xml").
+                header("Accept", "application/xml").
+        when().
+                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+        then().
+                body(matchesXsdInClasspath("VideoGameXSD.xsd"));
+    }
+
+    @Test
+    public void testVideoGameSchemaJSON() {
+        given().
+                pathParam("videoGameId", 5).
+        when().
+                get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+        then().
+                body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
+    }
+
+
 }
