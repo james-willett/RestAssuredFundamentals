@@ -12,6 +12,10 @@ public class VideoGame
 
     private String category;
 
+    public VideoGame() {
+
+    }
+
     public VideoGame(String reviewScore, String releaseDate, String name, String rating, String id, String category) {
         this.reviewScore = reviewScore;
         this.releaseDate = releaseDate;
