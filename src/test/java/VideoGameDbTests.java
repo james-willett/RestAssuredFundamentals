@@ -7,6 +7,7 @@ import static io.restassured.RestAssured.*;
 
 import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.lessThan;
 
 public class VideoGameDbTests extends VideoGameConfig {
 
@@ -133,6 +134,22 @@ public class VideoGameDbTests extends VideoGameConfig {
 
         System.out.println(videoGame.toString());
     }
+
+    @Test
+    public void captureResponseTime() {
+        long responseTime = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).time();
+        System.out.println("Response time in MS: " + responseTime);
+    }
+
+    @Test
+    public void assertOnResponseTime() {
+        when().
+                get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+        then().
+                time(lessThan(1000L));
+    }
+
+
 
 
 }
