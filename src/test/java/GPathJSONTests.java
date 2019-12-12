@@ -2,6 +2,7 @@ import config.FootballApiConfig;
 import io.restassured.response.Response;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,4 +48,43 @@ public class GPathJSONTests extends FootballApiConfig {
         int sumOfIds = response.path("squad.collect { it.id }.sum()");
         System.out.println("Sum of all IDs = " + sumOfIds);
     }
+
+    @Test
+    public void extractMapOfObjectWithFindAndFindAll() {
+        Response response = get("teams/57");
+        Map<String, ?> playerOfCertainPosition = response.path(
+                "squad.findAll { it.position == 'Defender'}.find { it.nationality == 'Greece' }"
+        );
+        System.out.println("Details of players: " + playerOfCertainPosition);
+    }
+
+    @Test
+    public void extractMapOfObjectWithFindAndFindAllWithParameters() {
+
+        String position = "Defender";
+        String nationality = "Greece";
+
+        Response response = get("teams/57");
+        Map<String, ?> playerOfCertainPosition = response.path(
+                "squad.findAll { it.position == '%s'}.find { it.nationality == '%s' }",
+                position, nationality);
+
+        System.out.println("Details of players: " + playerOfCertainPosition);
+    }
+
+    @Test
+    public void extractMultiplePlayers() {
+
+        String position = "Midfielder";
+        String nationality = "England";
+
+        Response response = get("teams/57");
+        ArrayList<Map<String, ?>> allPlayersCertainNation = response.path(
+                "squad.findAll { it.position == '%s'}.findAll { it.nationality == '%s' }",
+                position, nationality
+        );
+
+        System.out.println("All players: " + allPlayersCertainNation);
+    }
+
 }
