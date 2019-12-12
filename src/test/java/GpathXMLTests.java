@@ -78,4 +78,17 @@ public class GpathXMLTests extends VideoGameConfig {
 
         System.out.println(reviewScore);
     }
+
+    @Test
+    public void getAllNodesBasedOnACondition() {
+
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
+
+        int reviewScore = 90;
+
+        List<Node> allVideoGamesOverCertainScore = XmlPath.from(responseAsString).get(
+                "videoGames.videoGame.findAll { it.reviewScore.toFloat() >= " + reviewScore + "}");
+
+        System.out.println(allVideoGamesOverCertainScore);
+    }
 }
