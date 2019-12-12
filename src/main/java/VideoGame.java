@@ -1,8 +1,6 @@
 public class VideoGame
 {
-    private String id;
-
-    private String category;
+    private String reviewScore;
 
     private String releaseDate;
 
@@ -10,39 +8,32 @@ public class VideoGame
 
     private String rating;
 
-    private String reviewScore;
+    private String id;
+
+    private String category;
 
     public VideoGame() {
 
     }
 
-    public VideoGame(String id, String category, String releaseDate, String name, String rating, String reviewScore) {
-        this.id = id;
-        this.category = category;
+    public VideoGame(String reviewScore, String releaseDate, String name, String rating, String id, String category) {
+        this.reviewScore = reviewScore;
         this.releaseDate = releaseDate;
         this.name = name;
         this.rating = rating;
-        this.reviewScore = reviewScore;
-    }
-
-    public String getId ()
-    {
-        return id;
-    }
-
-    public void setId (String id)
-    {
         this.id = id;
-    }
-
-    public String getCategory ()
-    {
-        return category;
-    }
-
-    public void setCategory (String category)
-    {
         this.category = category;
+    }
+
+
+    public String getReviewScore ()
+    {
+        return reviewScore;
+    }
+
+    public void setReviewScore (String reviewScore)
+    {
+        this.reviewScore = reviewScore;
     }
 
     public String getReleaseDate ()
@@ -75,19 +66,29 @@ public class VideoGame
         this.rating = rating;
     }
 
-    public String getReviewScore ()
+    public String getId ()
     {
-        return reviewScore;
+        return id;
     }
 
-    public void setReviewScore (String reviewScore)
+    public void setId (String id)
     {
-        this.reviewScore = reviewScore;
+        this.id = id;
+    }
+
+    public String getCategory ()
+    {
+        return category;
+    }
+
+    public void setCategory (String category)
+    {
+        this.category = category;
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [id = "+id+", category = "+category+", releaseDate = "+releaseDate+", name = "+name+", rating = "+rating+", reviewScore = "+reviewScore+"]";
+        return "ClassPojo [reviewScore = "+reviewScore+", releaseDate = "+releaseDate+", name = "+name+", rating = "+rating+", id = "+id+", category = "+category+"]";
     }
 }

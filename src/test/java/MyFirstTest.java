@@ -1,24 +1,23 @@
-import config.EndPoint;
-import config.TestConfig;
+import config.VideoGameConfig;
+import config.VideoGamesEndpoints;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 
-public class MyFirstTest extends TestConfig {
+public class MyFirstTest extends VideoGameConfig {
 
     @Test
     public void myFirstTest() {
-        given().
-                log().
-                all().
-        when().get("videogames/1").
+        given()
+                .log().all().
+        when().get("videogames").
         then().
-                log().
-                all();
+                log().all();
     }
 
     @Test
-    public void getAllGames() {
-        when().get(EndPoint.VIDEOGAMES);
+    public void myFirstTestWithEndpoint() {
+        get(VideoGamesEndpoints.ALL_VIDEO_GAMES)
+        .then().log().all();
     }
 }

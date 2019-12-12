@@ -1,5 +1,5 @@
-import config.EndPoint;
-import config.TestConfig;
+import config.VideoGameConfig;
+import config.VideoGamesEndpoints;
 import io.restassured.path.xml.XmlPath;
 import io.restassured.path.xml.element.Node;
 import io.restassured.response.Response;
@@ -9,12 +9,12 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 
-public class GPathXMLTests extends TestConfig {
+public class GpathXMLTests extends VideoGameConfig {
 
     @Test
     public void getFirstGameInList() {
 
-        Response response = get(EndPoint.VIDEOGAMES);
+        Response response = get(VideoGamesEndpoints.ALL_VIDEO_GAMES);
 
         String name = response.path("videoGames.videoGame.name[0]");
 
@@ -24,7 +24,7 @@ public class GPathXMLTests extends TestConfig {
     @Test
     public void getAttributeName() {
 
-        Response response = get(EndPoint.VIDEOGAMES);
+        Response response = get(VideoGamesEndpoints.ALL_VIDEO_GAMES);
 
         String category = response.path("videoGames.videoGame[0].@category");
 
@@ -34,21 +34,23 @@ public class GPathXMLTests extends TestConfig {
     @Test
     public void getListOfXmlNodes() {
 
-        String responseAsString = get(EndPoint.VIDEOGAMES).asString();
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
 
         List<Node> allResults = XmlPath.from(responseAsString).get(
-                "videoGames.videoGame.findAll { element -> return element }");
+                "videoGames.videoGame.findAll { element -> return element }"
+        );
 
         System.out.println(allResults.get(2).get("name").toString());
     }
 
     @Test
-    public void getListOfXmlNodesByFindAllOnAttribute() {
+    public void getListOfXmlNodesByFindAllOnAttributes() {
 
-        String responseAsString = get(EndPoint.VIDEOGAMES).asString();
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
 
         List<Node> allDrivingGames = XmlPath.from(responseAsString).get(
-                "videoGames.videoGame.findAll { videoGame -> def category = videoGame.@category; category == 'Driving' }");
+                "videoGames.videoGame.findAll { videoGame -> def category = videoGame.@category; category=='Driving' }"
+        );
 
         System.out.println(allDrivingGames.get(0).get("name").toString());
     }
@@ -56,7 +58,7 @@ public class GPathXMLTests extends TestConfig {
     @Test
     public void getSingleNode() {
 
-        String responseAsString = get(EndPoint.VIDEOGAMES).asString();
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
 
         Node videoGame = XmlPath.from(responseAsString).get(
                 "videoGames.videoGame.find { videoGame -> def name = videoGame.name; name == 'Tetris'}");
@@ -69,7 +71,7 @@ public class GPathXMLTests extends TestConfig {
     @Test
     public void getSingleElementDepthFirst() {
 
-        String responseAsString = get(EndPoint.VIDEOGAMES).asString();
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
 
         int reviewScore = XmlPath.from(responseAsString).getInt(
                 "**.find { it.name == 'Gran Turismo 3'}.reviewScore");
@@ -80,7 +82,7 @@ public class GPathXMLTests extends TestConfig {
     @Test
     public void getAllNodesBasedOnACondition() {
 
-        String responseAsString = get(EndPoint.VIDEOGAMES).asString();
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
 
         int reviewScore = 90;
 
