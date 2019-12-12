@@ -67,4 +67,15 @@ public class GpathXMLTests extends VideoGameConfig {
 
         System.out.println(videoGameName);
     }
+
+    @Test
+    public void getSingleElementDepthFirst() {
+
+        String responseAsString = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).asString();
+
+        int reviewScore = XmlPath.from(responseAsString).getInt(
+                "**.find { it.name == 'Gran Turismo 3'}.reviewScore");
+
+        System.out.println(reviewScore);
+    }
 }
