@@ -42,4 +42,20 @@ public class AuthenticationTests {
         when().
                 get("http://localhost:8080/someEndpoint");
     }
+
+    @Test
+    public void relaxedHTTPSTest() {
+        given().
+                relaxedHTTPSValidation().
+        when().
+                get("https://localhost:8080/someEndpoint");
+    }
+
+    @Test
+    public void keystoreTest() {
+        given().
+                keyStore("/pathToJKS", "password").
+        when().
+                get("http://localhost:8080/someEndpoint");
+    }
 }
