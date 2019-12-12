@@ -26,4 +26,20 @@ public class AuthenticationTests {
         when().
                 get("http://localhost:8080/someEndpoint");
     }
+
+    @Test
+    public void oauth1Test() {
+        given().
+                auth().oauth("consumerKey", "consumerSecret", "consumerAccessToken", "secretToken").
+        when().
+                get("http://localhost:8080/someEndpoint");
+    }
+
+    @Test
+    public void oauth2Test() {
+        given().
+                auth().oauth2("accessToken").
+        when().
+                get("http://localhost:8080/someEndpoint");
+    }
 }

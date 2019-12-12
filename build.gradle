@@ -12,4 +12,6 @@ dependencies {
     compile 'io.rest-assured:rest-assured:4.1.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.6'
     compile 'io.rest-assured:json-schema-validator:4.1.2'
+
+    compile 'com.github.scribejava:scribejava-apis:2.5.3'
 }
