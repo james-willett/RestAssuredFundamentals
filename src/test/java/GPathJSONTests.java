@@ -33,4 +33,18 @@ public class GPathJSONTests extends FootballApiConfig {
         List<String> playerNames = response.path("squad.findAll { it.shirtNumber >= 23}.name");
         System.out.println("List of players" + playerNames);
     }
+
+    @Test
+    public void extractSingleValueWithHighestNumber() {
+        Response response = get("teams/57");
+        String playerName = response.path("squad.max { it.shirtNumber }.name");
+        System.out.println("Player with highest shirt number = " + playerName);
+    }
+
+    @Test
+    public void extractMultipleValuesAndSumThem() {
+        Response response = get("teams/57");
+        int sumOfIds = response.path("squad.collect { it.id }.sum()");
+        System.out.println("Sum of all IDs = " + sumOfIds);
+    }
 }
