@@ -1,3 +1,5 @@
 # RestAssuredFundamentals - Training Course code
 
-This is all of the code used in my Udemy video series - REST Assured Fundamentals
+NOTE!!! 
+
+This repoistory is out of date - see the new version [here](https://github.com/james-willett/rest-assured-fundamentals)
